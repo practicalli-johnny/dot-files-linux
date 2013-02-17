@@ -1,0 +1,23 @@
+[user]
+        name = John Stevenson
+        email = john@jr0cket.co.uk
+[core]
+        excludesfile = /Users/jstevenson/.gitignore_global
+        editor = emacsclient
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[color]
+        ui = auto
+[alias]
+        lol = log --pretty=oneline --abbrev-commit --graph
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+        sitrep = status -sb
+        word = diff --word-diff
+[credential]
+        helper = osxkeychain
+[log]
+        abbrevCommit = true
