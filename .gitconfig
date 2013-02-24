@@ -4,12 +4,12 @@
 [core]
         excludesfile = /Users/jstevenson/.gitignore_global
         editor = emacsclient
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[difftool "meld"]
+        cmd = meld \"$LOCAL\" \"$REMOTE\"
+        path =
+[mergetool "meld"]
+        cmd = meld \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
 [color]
         ui = auto
 [alias]
