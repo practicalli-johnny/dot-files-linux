@@ -18,6 +18,6 @@
         sitrep = status -sb
         word = diff --word-diff
 [credential]
-        helper = osxkeychain
+	helper = cache --timeout=3600
 [log]
         abbrevCommit = true
