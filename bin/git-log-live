@@ -1,0 +1,13 @@
+#!/bin/sh
+
+## Displays a continually updating git log in graph format
+## Taken from Tim Berglands advanced git workshop
+## Modified by @jr0cket to only show the 20 most recent commits,
+## so it the log fits on screen
+
+while :
+do
+clear
+git --no-pager log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative -n 20
+sleep 10
+done
