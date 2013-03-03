@@ -15,9 +15,11 @@
 [alias]
         lol = log --pretty=oneline --abbrev-commit --graph
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+        lives = !git-log-live
         sitrep = status -sb
+        sr = status -sb
         word = diff --word-diff
 [credential]
-	helper = cache --timeout=3600
+        helper = cache --timeout=3600
 [log]
         abbrevCommit = true
