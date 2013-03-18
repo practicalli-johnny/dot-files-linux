@@ -2,9 +2,10 @@
 !.gitignore
 !.lein
 !.z*
-!.bash*
+!.bashrc
 !.profile
 .lein/self-installs
+.lein/repl-history
 .zprezto
 .zcompcache
 .zcompdump
