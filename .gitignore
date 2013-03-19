@@ -1,6 +1,7 @@
 .*
 !.gitignore
 !.lein
+!.live-packs
 !.z*
 !.bashrc
 !.profile
