@@ -4,12 +4,14 @@
 [core]
         excludesfile = /Users/jstevenson/.gitignore_global
         editor = emacsclient
+
 [difftool "meld"]
         cmd = meld \"$LOCAL\" \"$REMOTE\"
         path =
 [mergetool "meld"]
         cmd = meld \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
         trustExitCode = true
+
 [color]
         ui = auto
 [alias]
