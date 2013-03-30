@@ -21,6 +21,7 @@
         sitrep = status -sb
         sr = status -sb
         word = diff --word-diff
+	unstage = reset HEAD
 [credential]
         helper = cache --timeout=3600
 [log]
