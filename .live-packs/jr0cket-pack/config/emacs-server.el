@@ -3,5 +3,5 @@
 
 ;; A check is done to ensure the emacs server is not already running.
 
-(load server)
+(load "server")
 (unless (server-running-p) (server-start))
