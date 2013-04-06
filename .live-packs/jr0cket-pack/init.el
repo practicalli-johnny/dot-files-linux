@@ -6,4 +6,5 @@
 ;; Load bindings config
 (live-load-config-file "bindings.el")
 (live-load-config-file "clean-mode-line.el")
-(live-load-config-file "over-ride-features.el")
+(live-load-config-file "emacs-server.el")
+(live-load-config-file "override-emacs-live-features.el")
