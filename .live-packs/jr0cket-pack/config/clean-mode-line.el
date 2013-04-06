@@ -4,16 +4,16 @@
     (paredit-mode . " Φ")
     (eldoc-mode . "")
     (abbrev-mode . "")
-    (undo-tree-mode . " τ")
-    (volatile-highlights-mode . " υ")
+    (undo-tree-mode . " υτ")
+    (volatile-highlights-mode . "")
     (elisp-slime-nav-mode . " δ")
     (nrepl-mode . " ηζ")
     (nrepl-interaction-mode . " ηζ")
     ;; Major modes
-    (clojure-mode . "λ")
+    (clojure-mode . "cλ")
     (hi-lock-mode . "")
     (python-mode . "Py")
-    (emacs-lisp-mode . "EL")
+    (emacs-lisp-mode . "eλ")
     (markdown-mode . "md"))
   "Alist for `clean-mode-line'.
 
