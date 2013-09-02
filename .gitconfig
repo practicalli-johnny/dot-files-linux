@@ -2,8 +2,9 @@
         name = John Stevenson
         email = john@jr0cket.co.uk
 [core]
-        excludesfile = /Users/jstevenson/.gitignore_global
+        excludesfile = /home/jr0cket/.gitignore_global
         editor = emacsclient
+	autocrlf = input
 
 [difftool "meld"]
         cmd = meld \"$LOCAL\" \"$REMOTE\"
@@ -15,8 +16,8 @@
 [color]
         ui = auto
 [alias]
-        lol = log --graph --decorate --relative-date --oneline
-        lg = log --graph --pretty=format:'%C(cyan)%h%Creset - %C(bold yellow)%d%Creset %s %C(blue)(%ar) %C(magenta)%an%Creset' --all
+        lg = log --graph --decorate --relative-date --oneline
+        lp = log --graph --pretty=format:'%C(cyan)%h%Creset - %C(bold yellow)%d%Creset %s %C(blue)(%ar) %C(magenta)%an%Creset' --all
         lives = !git-log-live
         sitrep = status -sb
         sr = status -sb
