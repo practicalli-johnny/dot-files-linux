@@ -11,6 +11,9 @@
 .zcompcache
 .zcompdump
 .zhistory
+*.ogv
+*.zwc
+Calibre*
 Documents
 Downloads
 Dropbox
@@ -19,6 +22,10 @@ Pictures
 Ubuntu*
 Videos
 apps
+emacs-live-old-config
 examples.desktop
 projects
+tmp
+
+
 
