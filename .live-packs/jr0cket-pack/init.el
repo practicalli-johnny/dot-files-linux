@@ -8,6 +8,7 @@
 (live-load-config-file "clean-mode-line.el")
 (live-load-config-file "emacs-server.el")
 (live-load-config-file "org-mode.el")
+(live-load-config-file "ox-reveal.el")
 (live-load-config-file "maintain-emacs-session.el")
 (live-load-config-file "override-emacs-live-features.el")
 
@@ -19,3 +20,11 @@
 ;; - put cursor at end of line and use C-x C-e to test font
 ;; (live-set-default-font "Ubuntu Mono 16")
 (live-set-default-font "Ubuntu 12")
+
+
+
+;; Org-reveal configuration
+;; Location of Reveal.js folder - full path to top level
+(setq org-reveal-root "file:///home/jr0cket/apps/revealjs/current")
+
+
