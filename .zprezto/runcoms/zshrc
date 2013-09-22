@@ -17,12 +17,23 @@ fi
 
 # Syntax Highlighting over-rides
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold,bg=green'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold,bg=green'
 ZSH_HIGHLIGHT_STYLES[path]='bold'
+ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
+## To differentiate aliases from other command types
+ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold,bg=green'
+
+## To have paths colored instead of underlined
+#ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+
+
+# Configuration for Nodejs
 export NODEJS_HOME=/home/jr0cket/apps/nodejs/bin
 export PATH=$PATH:$NODEJS_HOME
 
-
+# Configuration for MongoDB
 export MONGODB_HOME=/home/jr0cket/apps/mongodb/current
 export PATH=$PATH:$MONGODB_HOME/bin
 
