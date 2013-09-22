@@ -19,14 +19,17 @@ fi
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold,bg=green'
 ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold,bg=green'
+ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold,bg=green'
 ZSH_HIGHLIGHT_STYLES[path]='bold'
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
-## To differentiate aliases from other command types
-ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold,bg=green'
-
 ## To have paths colored instead of underlined
 #ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
+
+## Reset colours if on a poor projector 
+#ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold,bg=green'
+#ZSH_HIGHLIGHT_STYLES[builtin]='none'
+#ZSH_HIGHLIGHT_STYLES[alias]='none'
 
 
 # Configuration for Nodejs
