@@ -1,1 +1,0 @@
-/home/jr0cket/.zprezto/runcoms/zshrc
