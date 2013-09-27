@@ -11,6 +11,7 @@
 (live-load-config-file "ox-reveal.el")
 (live-load-config-file "maintain-emacs-session.el")
 (live-load-config-file "override-emacs-live-features.el")
+(live-load-config-file "four-clj.el")
 
 ;; Load in personal code snippets
 ;; need to create some snippets first though..
@@ -18,8 +19,9 @@
 
 ;; Setting the default font (Ubuntu font from terminal)
 ;; - put cursor at end of line and use C-x C-e to test font
+(live-set-default-font "Ubuntu Mono 12")
 ;; (live-set-default-font "Ubuntu Mono 16")
-(live-set-default-font "Ubuntu 12")
+;; (live-set-default-font "Ubuntu 12")
 
 
 
