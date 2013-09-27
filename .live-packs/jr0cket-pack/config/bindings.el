@@ -17,7 +17,7 @@
 
 ;; Launch the Clojure repl via Leiningen - M-x clojure-jack-in
 ;; Global shortcut definition to fire up clojure repl and connect to it
-(global-set-key (kbd "C-c C-j") 'nrepl-jack-in)
+(define-key global-map (kbd "C-c C-j") 'nrepl-jack-in)
 
 
 ;;; Org-mode customisations, especially for org-capture
