@@ -27,6 +27,10 @@
 
 ;; Org-reveal configuration
 ;; Location of Reveal.js folder - full path to top level
-(setq org-reveal-root "file:///home/jr0cket/apps/revealjs/current")
+;; Set only if creating presentations outside the Reveal.js folder
+;;(setq org-reveal-root "file:///home/jr0cket/apps/revealjs/current")
 
+;; Using a CDN or your own web server ??
+;; There does not seem to be an option for this yet
+(setq org-reveal-root "")
 
