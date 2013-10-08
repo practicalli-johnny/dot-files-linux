@@ -24,6 +24,13 @@
 ;; (live-set-default-font "Ubuntu 12")
 
 
+;; Automatically load an existing buffer from file if a change is detected
+;; - should not work if a buffer has unsaved modifications
+(global-auto-revert-mode t)
+
+;; Replace the active region by typing text, delete region with the Backspace key
+(delete-selection-mode 1)
+
 
 ;; Org-reveal configuration
 ;; Location of Reveal.js folder - full path to top level
@@ -33,4 +40,6 @@
 ;; Using a CDN or your own web server ??
 ;; There does not seem to be an option for this yet
 (setq org-reveal-root "")
+
+
 
