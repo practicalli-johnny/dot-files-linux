@@ -56,6 +56,7 @@
     (:reveal-speed "REVEAL_SPEED" nil org-reveal-transition-speed t)
     (:reveal-theme "REVEAL_THEME" nil org-reveal-theme t)
     (:reveal-extra-css "REVEAL_EXTRA_CSS" nil nil nil)
+    (:reveal-extra-js "REVEAL_EXTRA_JS" nil nil nil)
     (:reveal-hlevel "REVEAL_HLEVEL" nil nil t)
     (:reveal-mathjax nil "reveal_mathjax" org-reveal-mathjax t)
     (:reveal-mathjax-url "REVEAL_MATHJAX_URL" nil org-reveal-mathjax-url t)
@@ -218,12 +219,15 @@ can be include."
 (defun org-reveal-export-block (export-block contents info)
   "Transocde a EXPORT-BLOCK element from Org to Reveal.
 CONTENTS is nil. NFO is a plist holding contextual information."
-  (when (string= (org-element-property :type export-block) "NOTES")
-    (let ((block-string (org-element-property :value export-block)))
-      (concat
-       "<aside class=\"notes\">\n"
-       (org-export-string-as block-string 'html 'body-only)
-       "</aside>"))))
+  (let ((block-type (org-element-property :type export-block))
+        (block-string (org-element-property :value export-block)))
+    (cond ((string= block-type "NOTES")
+           (concat
+            "<aside class=\"notes\">\n"
+            (org-export-string-as block-string 'html 'body-only)
+            "</aside>"))
+          ((string= block-type "HTML")
+           (org-remove-indentation block-string)))))
                  
 (defun org-reveal-headline (headline contents info)
   "Transcode a HEADLINE element from Org to Reveal.
@@ -277,16 +281,18 @@ holding contextual information."
              ;; into vertical ones.
              "<section>\n")
          ;; Start a new slide.
-         (format "<section id=\"%s\" %s%s%s%s%s>\n"
+         (format "<section id=\"%s\" %s%s%s%s%s%s%s>\n"
                  (or (org-element-property :CUSTOM_ID headline)
                      (concat "sec-" (mapconcat 'number-to-string
                                                (org-export-get-headline-number headline info)
                                                "-")))
                  (if-format " data-state=\"%s\"" (org-element-property :REVEAL_DATA_STATE headline))
+                 (if-format " data-transition=\"%s\"" (org-element-property :REVEAL_DATA_TRANSITION headline))
                  (if-format " data-background=\"%s\"" (org-element-property :REVEAL_BACKGROUND headline))
                  (if-format " data-background-size=\"%s\"" (org-element-property :REVEAL_BACKGROUND_SIZE headline))
                  (if-format " data-background-repeat=\"%s\"" (org-element-property :REVEAL_BACKGROUND_REPEAT headline))
-                 (if-format " data-background-transition=\"%s\"" (org-element-property :REVEAL_BACKGROUND_TRANS headline)))
+                 (if-format " data-background-transition=\"%s\"" (org-element-property :REVEAL_BACKGROUND_TRANS headline))
+                 (if-format " %s" (org-element-property :REVEAL_EXTRA_ATTR headline)))
          ;; The HTML content of this headline.
          (format "\n<h%d%s>%s</h%d>\n"
                  level1
@@ -340,13 +346,13 @@ using custom variable `org-reveal-root'."
          (theme-full (org-reveal--append-path theme-path theme-file))
          (extra-css (plist-get info :reveal-extra-css))
          (extra-css-link-tag (if extra-css
-                                 (format "<link rel=\"stylesheet\" href=\"./%s\">" extra-css)
+                                 (format "<link rel=\"stylesheet\" href=\"%s\"/>" extra-css)
                                ""))
          (pdf-css (org-reveal--append-pathes css-dir-name '("print" "pdf.css"))))
-    (format "<link rel=\"stylesheet\" href=\"%s\">
-<link rel=\"stylesheet\" href=\"%s\" id=\"theme\">
+    (format "<link rel=\"stylesheet\" href=\"%s\"/>
+<link rel=\"stylesheet\" href=\"%s\" id=\"theme\"/>
 %s
-<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" media=\"print\">
+<link rel=\"stylesheet\" href=\"%s\" type=\"text/css\" media=\"print\"/>
 "
                 min-css-file-name theme-full extra-css-link-tag
                 pdf-css)))
@@ -366,7 +372,8 @@ custom variable `org-reveal-root'."
          (lib-dir-name (org-reveal--append-path root-path "lib"))
          (lib-js-dir-name (org-reveal--append-path lib-dir-name "js"))
          (plugin-dir-name (org-reveal--append-path root-path "plugin"))
-         (markdown-dir-name (org-reveal--append-path plugin-dir-name "markdown")))
+         (markdown-dir-name (org-reveal--append-path plugin-dir-name "markdown"))
+         (extra-js (plist-get info :reveal-extra-js)))
     (concat
      (format "<script src=\"%s\"></script>\n<script src=\"%s\"></script>\n"
              (org-reveal--append-path lib-js-dir-name "head.min.js")
@@ -421,14 +428,15 @@ custom variable `org-reveal-root'."
      (format "
         			// Optional libraries used to extend on reveal.js
         			dependencies: [
-        				{ src: '%s', condition: function() { return !document.body.classList; } },
-        				{ src: '%s', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        				{ src: '%s', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-        				{ src: '%s', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-        				{ src: '%s', async: true, condition: function() { return !!document.body.classList; } },
-        				{ src: '%s', async: true, condition: function() { return !!document.body.classList; } }
+        				{ src: '%s', condition: function() { return !document.body.classList; } }
+        				,{ src: '%s', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: '%s', condition: function() { return !!document.querySelector( '[data-markdown]' ); } }
+        				,{ src: '%s', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        				,{ src: '%s', async: true, condition: function() { return !!document.body.classList; } }
+        				,{ src: '%s', async: true, condition: function() { return !!document.body.classList; } }
         				// { src: '%s', async: true, condition: function() { return !!document.body.classList; } }
         				// { src: '%s', async: true, condition: function() { return !!document.body.classList; } }
+         				%s
         			]
         		});\n"
                (org-reveal--append-path lib-js-dir-name "classList.js")
@@ -438,7 +446,8 @@ custom variable `org-reveal-root'."
                (org-reveal--append-pathes plugin-dir-name '("zoom-js" "zoom.js"))
                (org-reveal--append-pathes plugin-dir-name '("notes" "notes.js"))
                (org-reveal--append-pathes plugin-dir-name '("search" "search.js"))
-               (org-reveal--append-pathes plugin-dir-name '("remotes" "remotes.js")))
+               (org-reveal--append-pathes plugin-dir-name '("remotes" "remotes.js"))
+               (if extra-js (concat "," extra-js) ""))
                 "</script>\n")))
 
 (defun org-reveal-toc-headlines-r (headlines info prev_level hlevel prev_x prev_y)
@@ -594,7 +603,15 @@ the plist used as a communication channel."
       contents)
      ((org-html-standalone-image-p paragraph info)
       ;; standalone image
-      contents)
+      (let ((frag (org-export-read-attribute :attr_reveal paragraph :frag)))
+        (if frag
+            (progn
+              ;; This is ugly; need to update if the output from
+              ;; org-html-format-inline-image changes.
+              (unless (string-match "class=\"figure\"" contents)
+                (error "Unexpected HTML output for image!"))
+              (replace-match (concat "class=\"figure fragment " frag " \"") t t contents))
+          contents)))
      (t (format "<p%s>\n%s</p>"
                 (if-format " class=\"fragment %s\""
                            (org-export-read-attribute :attr_reveal paragraph :frag))
@@ -626,9 +643,9 @@ contents is the transcoded contents string.
 info is a plist holding export options."
   (concat
    (format "<?xml version=\"1.0\" encoding=\"utf-8\"?>
-<!doctype html>\n<html%s>\n<head>\n"
+<!DOCTYPE html>\n<html%s>\n<head>\n"
            (if-format " lang=\"%s\"" (plist-get info :language)))
-   "<meta charset=\"utf-8\">"
+   "<meta charset=\"utf-8\"/>\n"
    (if-format "<title>%s</title>\n" (plist-get info :title))
    (if-format "<meta name=\"author\" content=\"%s\"/>\n" (plist-get info :author))
    (if-format "<meta name=\"description\" content=\"%s\"/>\n" (plist-get info :description))
