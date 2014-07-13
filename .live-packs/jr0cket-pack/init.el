@@ -3,8 +3,15 @@
 ;; User this file to initiate the pack configuration.
 ;; See README for more information.
 
+
+;; Emacs multi-media system libraries
+(live-add-pack-lib "emms")
+
 ;; Load bindings config
+(live-load-config-file "emms.el")
 (live-load-config-file "bindings.el")
+(live-load-config-file "ibuffer-categories.el")
+(live-load-config-file "ibuffer-format.el")
 (live-load-config-file "clean-mode-line.el")
 (live-load-config-file "emacs-server.el")
 (live-load-config-file "org-mode.el")
@@ -12,6 +19,7 @@
 (live-load-config-file "maintain-emacs-session.el")
 (live-load-config-file "override-emacs-live-features.el")
 (live-load-config-file "four-clj.el")
+
 
 ;; Load in personal code snippets
 ;; need to create some snippets first though..
@@ -41,5 +49,7 @@
 ;; There does not seem to be an option for this yet
 (setq org-reveal-root "")
 
+;; Changing the Emacs Live logo -
+;; (live-ascii-art-logo )
 
 
