@@ -8,6 +8,10 @@
 (define-key global-map (kbd "C-z") 'undo-tree-undo)
 (define-key global-map (kbd "M-z") 'undo-tree-redo)
 
+;; Set keybindings for cycling buffers
+(global-set-key [C-prior] 'previous-buffer)
+(global-set-key [C-next] 'next-buffer)
+
 
 ;;; Remap multiple cursors as I dont know what C-S translates to
 (define-key global-map (kbd "C-c m c") 'mc/edit-lines)
