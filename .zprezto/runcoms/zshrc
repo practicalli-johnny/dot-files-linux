@@ -22,6 +22,8 @@ ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold,bg=green'
 ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold,bg=green'
 ZSH_HIGHLIGHT_STYLES[path]='bold'
 ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('rm -fr *' 'fg=white,bold,bg=red')
+ZSH_HIGHLIGHT_PATTERNS+=('rm -f *' 'fg=white,bold,bg=red')
 
 ## To have paths colored instead of underlined
 #ZSH_HIGHLIGHT_STYLES[path]='fg=cyan'
@@ -33,8 +35,13 @@ ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
 
 
 # Configuration for Nodejs
-export NODEJS_HOME=/home/jr0cket/apps/nodejs/bin
+export NODEJS_HOME=/home/jr0cket/apps/nodejs/current/bin
 export PATH=$PATH:$NODEJS_HOME
+
+# Configuration for Gradle
+export GRADLE_HOME=$HOME/apps/gradle/current
+export PATH=$PATH:$GRADLE_HOME/bin 
+export GRADLE_OPTS=-Dorg.gradle.daemon=true
 
 # Configuration for MongoDB
 export MONGODB_HOME=/home/jr0cket/apps/mongodb/current
