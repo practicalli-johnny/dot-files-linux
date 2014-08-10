@@ -1,0 +1,21 @@
+#!/bin/sh
+
+## Simple script to add a node and express to an Angular project,
+## so I can run the angular website on Heroku.
+
+## Author: John Stevenson
+## Twitter: jr0cket
+
+## Add node express as a dependency to server up the static site
+echo 'Add node express...'
+npm install gzippo express --save
+echo ''
+
+## Copy the node starup file and Procfile for Heroku
+echo 'Adding web.js to define how node runs'
+echo 'Adding Procfile to tell Heroku which node file to use'
+cp /home/jr0cket/projects/javascript/add-node-magic/* .
+echo ''
+
+echo 'Dont forget to run grunt build'
+
