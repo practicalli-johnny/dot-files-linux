@@ -31,6 +31,8 @@
 ;; (live-set-default-font "Ubuntu Mono 16")
 ;; (live-set-default-font "Ubuntu 12")
 
+;; Stop the buffer jumping when scrolling up and down
+(setq scroll-conservatively 10000)
 
 ;; Automatically load an existing buffer from file if a change is detected
 ;; - should not work if a buffer has unsaved modifications
