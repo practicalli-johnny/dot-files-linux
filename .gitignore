@@ -5,6 +5,7 @@
 !.z*
 !.bashrc
 !.profile
+!.zprezto/runcoms
 .lein/self-installs
 .lein/repl-history
 .zprezto
