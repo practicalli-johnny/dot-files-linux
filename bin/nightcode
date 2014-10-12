@@ -1,0 +1,7 @@
+#!/bin/sh
+
+## Run the Clojure IDE, Nightcode
+
+cd ~/apps/nightcode
+java -jar ./current @* &
+
