@@ -11,7 +11,7 @@
 
 ;;nicely format the ibuffer and include git-status
 (setq ibuffer-formats '((mark modified read-only git-status-mini " "
-      (name 32 32 :left :elide)
+      (name 42 42 :left :elide)
       " "
       (size 8 -1 :right)
       " "

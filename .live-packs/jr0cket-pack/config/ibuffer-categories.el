@@ -10,10 +10,9 @@
   (quote (("default"      
             ("Kanban"
              (filename . "todo-list.org"))
-            ("hexo"
+            ("Dev Docs"
              (or
-              (filename . "/jr0cket.github.io-hexo/")
-              (filename . "/hexo-theme-test/")
+              (filename . "/dev-docs/")
               ))
             ("Slides" ;; Presentations created in emacs with Org-mode and Org-reveal
              (filename . "/projects/dev-docs/slides/"))
@@ -24,6 +23,8 @@
               ))  
             ("WhatsMySalary"
              (filename . "/projects/clojure/whats-my-salary/"))
+            ("EmacsLive"
+             (filename . "/.live-packs/"))
             ("Coding" ;; Coding files not in the above project
               (or
                 (mode . clojure-mode)
@@ -32,7 +33,7 @@
                 (mode . python-mode)
                 (mode . emacs-lisp-mode)
                 ;; etc
-                ))
+                ))            
             ))))
 
 (add-hook 'ibuffer-mode-hook
