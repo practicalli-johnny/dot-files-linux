@@ -1,8 +1,9 @@
 ;;; emms-player-mpd.el --- MusicPD support for EMMS
 
-;; Copyright (C) 2005, 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+;; Copyright (C) 2005, 2006, 2007, 2008, 2009, 2014 Free Software Foundation, Inc.
 
-;; Author: Michael Olson <mwolson@gnu.org>
+;; Author: Michael Olson <mwolson@gnu.org>, Jose Antonio Ortega Ruiz
+;; <jao@gnu.org>
 
 ;; This file is part of EMMS.
 
@@ -130,8 +131,9 @@
 (defcustom emms-player-mpd-music-directory nil
   "The value of 'music_directory' in your MusicPD configuration file.
 
-You need this if your playlists use absolute file names, otherwise
-leave it set to nil."
+Unless your MusicPD is configured to use absolute file names, you must
+set this variable to the value of 'music_directory' in your MusicPD
+config."
   ;; The :format part ensures that entering directories happens on the
   ;; next line, where there is more space to work with
   :type '(choice :format "%{%t%}:\n   %[Value Menu%] %v"
@@ -1188,6 +1190,14 @@ The track should be an alist as per `emms-player-mpd-get-alist'."
         (emms-info-mpd-process track track-info)
         (funcall emms-cache-set-function 'file name track)))))
 
+(defun emms-cache--info-cleanup (info)
+  (let ((xs (mapcar (lambda (x)
+                      (and (stringp x)
+                           (not (string-match-p "\\`\\(Last-\\|direct\\)" x))
+                           x))
+                    info)))
+    (cons nil (delq nil xs))))
+
 (defun emms-cache-set-from-mpd-directory (dir)
   "Dump all MusicPD data from DIR into the EMMS cache.
 
@@ -1207,11 +1217,18 @@ This is useful to do when you have recently acquired new music."
          nil
          (lambda (closure response)
            (message "Dumping MusicPD data to cache...processing")
-           (let ((info (emms-player-mpd-get-alists
-                        (emms-player-mpd-parse-response response))))
-             (dolist (track-info info)
-               (emms-cache-set-from-mpd-track track-info))
-             (message "Dumping MusicPD data to cache...done")))))
+           (let ((info (emms-player-mpd-parse-response response)))
+             (when (null (car info))
+               (let* ((info (emms-cache--info-cleanup info))
+                      (info (emms-player-mpd-get-alists info))
+                      (track 1)
+                      (total (length info)))
+                 (dolist (track-info info)
+                   (message "Dumping MusicPD data to cache...%d/%d" track total)
+                   (emms-cache-set-from-mpd-track track-info)
+                   (setq track (+ 1 track)))
+                 (message "Dumping MusicPD data to cache... %d tracks processed"
+                          total)))))))
     (error "Caching is not enabled")))
 
 (defun emms-cache-set-from-mpd-all ()
