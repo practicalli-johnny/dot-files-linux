@@ -1,8 +1,10 @@
-# Config files for my Ubuntu development environment
+# dot files for Ubuntu development environment
 
-The original repository for all my configurations used on Ubuntu Linux.   This repository is being replaced by individual repositories for each set of configuration files
+Configuration files used for software development on Ubuntu (Regolith) Linux
 
-* [Emacs Live - jr0cket-pack](https://github.com/jr0cket/jr0cket-pack) - my own addtions and tweaks to [Emacs Live](https://github.com/overtone/emacs-live) configuration for Emacs
-* [Prezto Zsh configuration]() - personal configuration for [Prezto](https://github.com/sorin-ionescu/prezto) **work in progresss**
-* Useful scripts - **work in progresss**
-* Git config - **work in progresss**
+Configuration is typically contained in `$XDG_CONFIG_HOME` which is set to the `~/.config` directory
+
+* Git config
+* [prezto](https://github.com/sorin-ionescu/prezto) - Zsh configuration and theme
+* [powerline10k](https://github.com/romkatv/powerlevel10k) - Zsh terminal prompt theme
+* assorted bash script
