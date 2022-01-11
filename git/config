@@ -1,0 +1,40 @@
+[user]
+	name = John Practicalli
+	email = 250870+practicalli-john@users.noreply.github.com
+
+[core]
+	excludesfile = /home/practicalli/.config/git/ignore-global
+	editor = emacsclient
+	autocrlf = input
+
+[color]
+				ui = auto
+
+[init]
+	defaultBranch = main
+
+[github]
+	user = practicalli-john
+	oauth-token = replace-with-an-actual-developer-token
+
+[difftool "meld"]
+				cmd = meld \"$LOCAL\" \"$REMOTE\"
+				path =
+
+[mergetool "meld"]
+				cmd = meld \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+				trustExitCode = true
+
+[alias]
+	lg = log --graph --decorate --relative-date --oneline
+	lp = log --graph --pretty=format:'%C(cyan)%h%Creset - %C(bold yellow)%d%Creset %s %C(blue)(%ar) %C(magenta)%an%Creset' --all
+	sitrep = status -sb
+	sr = status -sb
+	word = diff --word-diff
+	unstage = reset HEAD
+
+[credential]
+	helper = cache --timeout=3600
+
+[log]
+	abbrevCommit = true
