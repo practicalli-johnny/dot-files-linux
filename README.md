@@ -1,4 +1,6 @@
-# dot files for Ubuntu development environment
+# DEPRECATED Project
+
+**Use the [Practicalli dotfiles](https://github.com/practicalli/dotfiles) project for maintained configuration for AWS, Git, Zsh, Kitty Terminal and Regolith Desktop**
 
 Configuration files used for software development on Ubuntu (Regolith) Linux
 
